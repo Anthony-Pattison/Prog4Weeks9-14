@@ -10,11 +10,9 @@ public class plants : MonoBehaviour
     [SerializeField]
     float decreaseAmount;
     
-    // Update is called once per frame
     void Update()
     {
         hydration -= decreaseAmount * Time.deltaTime;
         hunger -= decreaseAmount * Time.deltaTime;
-
     }
 }

@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 21028531}
+  - component: {fileID: 21028532}
   m_Layer: 0
   m_Name: Enviornment
   m_TagString: Untagged
@@ -151,6 +152,38 @@ Transform:
   - {fileID: 687161853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21028532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21028530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 5117f017ffbcccb43802d815725e49ae, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &41160539
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304533155}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.19, y: 0.333, z: -2.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -390,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71da58cbfb0c8544f80ec18055d2c1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::plants
-  hydration: 50
+  hydration: 14
   hunger: 50
   decreaseAmount: 1
 --- !u!1 &338963990
@@ -723,7 +756,7 @@ Transform:
   m_GameObject: {fileID: 687161849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.11, z: 0}
   m_LocalScale: {x: 20, y: 0.2, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1331,7 +1364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540011857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.31, y: 0.32, z: -2.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1844,6 +1877,7 @@ GameObject:
   - component: {fileID: 1680899132}
   - component: {fileID: 1680899131}
   - component: {fileID: 1680899133}
+  - component: {fileID: 1680899134}
   m_Layer: 0
   m_Name: Gardener
   m_TagString: Untagged
@@ -1882,12 +1916,18 @@ MonoBehaviour:
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"plantsToLookAfter":{"_value":[1,2,3],"_name":"plantsToLookAfter","_id":"4b7b6866-47a3-4739-8479-02a6799dc0be","$type":"NodeCanvas.Framework.Variable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
     UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"plantToTend":{"_name":"plantToTend","_id":"9b1ecf8f-5ddc-4286-8853-cc7a2082ce72","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"minWaterCheck":{"_value":25.0,"_name":"minWaterCheck","_id":"a8a04e19-0b6c-425d-8368-67daffef71c5","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"speed":{"_value":5.0,"_name":"speed","_id":"282908ba-cebe-4c49-9cac-368fd9b16f89","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"stoppingDistance":{"_value":2.0,"_name":"stoppingDistance","_id":"e43a3246-04f7-419d-b0d0-72e8ed44372a","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"waterFillStation":{"_value":4,"_name":"waterFillStation","_id":"431eb542-3129-42c6-adbc-ac673eb3d2b8","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences:
   - {fileID: 0}
   - {fileID: 2017561340}
   - {fileID: 1540011857}
   - {fileID: 304533155}
+  - {fileID: 1963650255}
   _serializedVariables:
   - _json: '{"_value":[1,2,3],"_name":"plantsToLookAfter","_id":"4b7b6866-47a3-4739-8479-02a6799dc0be","$type":"NodeCanvas.Framework.Variable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
@@ -1897,6 +1937,23 @@ MonoBehaviour:
     - {fileID: 2017561340}
     - {fileID: 1540011857}
     - {fileID: 304533155}
+  - _json: '{"_name":"plantToTend","_id":"9b1ecf8f-5ddc-4286-8853-cc7a2082ce72","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
+  - _json: '{"_value":25.0,"_name":"minWaterCheck","_id":"a8a04e19-0b6c-425d-8368-67daffef71c5","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_value":5.0,"_name":"speed","_id":"282908ba-cebe-4c49-9cac-368fd9b16f89","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_value":2.0,"_name":"stoppingDistance","_id":"e43a3246-04f7-419d-b0d0-72e8ed44372a","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_value":1,"_name":"waterFillStation","_id":"431eb542-3129-42c6-adbc-ac673eb3d2b8","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references:
+    - {fileID: 0}
+    - {fileID: 1963650255}
 --- !u!114 &1680899132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1910,14 +1967,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: NodeCanvas::NodeCanvas.BehaviourTrees.BehaviourTreeOwner
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_action":{"plants":{"_name":"plantsToLookAfter","_targetVariableID":"4b7b6866-47a3-4739-8479-02a6799dc0be"},"$type":"NodeCanvas.Tasks.Actions.checkPlantsAT"},"_tag":"Start","_position":{"x":764.0,"y":277.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode"}],"connections":[],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_position":{"x":694.8767,"y":111.7327},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_position":{"x":504.4323,"y":321.5483},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"1"},{"_condition":{"minWaterBBP":{"_value":90.0},"checkGreaterThan":false,"$type":"NodeCanvas.Tasks.Conditions.checkWaterCT"},"_position":{"x":385.4323,"y":445.5483},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"2"},{"_action":{"waterFillStationBBP":{"_name":"waterFillStation","_targetVariableID":"431eb542-3129-42c6-adbc-ac673eb3d2b8"},"stoppingDistanceBBP":{"_name":"stoppingDistance","_targetVariableID":"e43a3246-04f7-419d-b0d0-72e8ed44372a"},"$type":"NodeCanvas.Tasks.Actions.moveAndFillUpWaterAT"},"_position":{"x":560.4323,"y":446.8817},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"3"},{"_position":{"x":1043.391,"y":326.2026},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"4"},{"_action":{"plantsBBP":{"_name":"plantsToLookAfter","_targetVariableID":"4b7b6866-47a3-4739-8479-02a6799dc0be"},"plantToTendBBP":{"_name":"plantToTend","_targetVariableID":"9b1ecf8f-5ddc-4286-8853-cc7a2082ce72"},"$type":"NodeCanvas.Tasks.Actions.checkPlantsAT"},"_tag":"","_position":{"x":882.955,"y":413.0237},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"5"},{"_condition":{"minWaterBBP":{"_name":"minWaterCheck","_targetVariableID":"a8a04e19-0b6c-425d-8368-67daffef71c5"},"$type":"NodeCanvas.Tasks.Conditions.checkWaterCT"},"_position":{"x":1021.17,"y":412.8893},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"6"},{"_action":{"plantToTend":{"_name":"plantToTend","_targetVariableID":"9b1ecf8f-5ddc-4286-8853-cc7a2082ce72"},"speedBBP":{"_name":"speed","_targetVariableID":"282908ba-cebe-4c49-9cac-368fd9b16f89"},"stoppingDistanceBBP":{"_name":"stoppingDistance","_targetVariableID":"e43a3246-04f7-419d-b0d0-72e8ed44372a"},"$type":"NodeCanvas.Tasks.Actions.moveToAndTendAT"},"_position":{"x":1175.427,"y":414.3571},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"7"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[{"name":"Water
+    a plant","rect":{"xMin":852.955,"yMin":259.8691,"xMax":1350.427,"yMax":503.3571}},{"name":"Fill
+    Water","rect":{"xMin":355.4323,"yMin":256.5483,"xMax":761.4323,"yMax":534.5483},"autoGroup":true}],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
   _boundGraphObjectReferences: []
   _boundGraphSource:
     _version: 3.41
     _category: 
     _comments: 
-    _translation: {x: 77, y: 65}
-    _zoomFactor: 1
+    _translation: {x: -61, y: 4}
+    _zoomFactor: 0.74997854
   _firstActivation: 0
   _enableAction: 0
   _disableAction: 0
@@ -1938,8 +1997,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7757852633ddb541833084fdd165fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gardenerManager
-  wateringCanWater: 50
+  wateringCanWater: 20
   foodAmount: 100
+--- !u!195 &1680899134
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680899129}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1963650254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,7 +2045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963650254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.998, y: 0.1, z: 0.31703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1998,7 +2079,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017561340}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.69, y: 0.32, z: -2.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2046,7 +2127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021309490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.1, y: 0.56, z: 3.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2061,10 +2142,10 @@ SceneRoots:
   - {fileID: 1592228350}
   - {fileID: 1289426932}
   - {fileID: 21028531}
+  - {fileID: 1680899130}
+  - {fileID: 41160542}
   - {fileID: 1540011858}
   - {fileID: 2017561341}
   - {fileID: 304533156}
   - {fileID: 1963650255}
   - {fileID: 2021309491}
-  - {fileID: 1680899130}
-  - {fileID: 41160542}

@@ -7,8 +7,8 @@ namespace NodeCanvas.Tasks.Actions {
 
 	public class checkPlantsAT : ActionTask {
 		
-		public BBParameter<List<GameObject>> plants = new BBParameter<List<GameObject>>();
-
+		public BBParameter<List<GameObject>> plantsBBP = new BBParameter<List<GameObject>>();
+		public BBParameter<GameObject> plantToTendBBP;
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit() {
@@ -19,12 +19,23 @@ namespace NodeCanvas.Tasks.Actions {
 		//Call EndAction() to mark the action as finished, either in success or failure.
 		//EndAction can be called from anywhere.
 		protected override void OnExecute() {
-			foreach (var plant in plants.value)
+			float lowestHydration = 100f;
+			float lowestHunger = 100f;
+			GameObject plantToTend = null;
+
+			foreach (var plant in plantsBBP.value)
 			{
 				plants plantClass = plant.GetComponent<plants>();
-
+				if (plantClass.hydration < lowestHydration)
+				{
+					lowestHydration = plantClass.hydration;
+					lowestHunger = plantClass.hunger;
+					plantToTend = plant;
+				}
             }
-			EndAction(true);
+            plantToTendBBP.value = plantToTend;
+
+            EndAction(true);
 		}
 
 		//Called once per frame while the action is active.
