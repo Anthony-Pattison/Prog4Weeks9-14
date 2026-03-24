@@ -1540,6 +1540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::playerScript
   movementSpeed: 6
   mouseSens: 600
+  cameraTransform: {fileID: 286291384}
 --- !u!4 &1083986268
 Transform:
   m_ObjectHideFlags: 0

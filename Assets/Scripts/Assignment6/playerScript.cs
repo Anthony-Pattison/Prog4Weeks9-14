@@ -7,7 +7,7 @@ public class playerScript : MonoBehaviour
     float movementSpeed;
     [SerializeField]
     float mouseSens;
-
+    public GameObject cameraTransform;
     Rigidbody thisRB;
     Transform orientation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,13 +20,19 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.eulerAngles += mouseInput() * mouseSens * Time.deltaTime;
+        Vector3 rotation = transform.eulerAngles;
+        rotation += mouseInput() * mouseSens * Time.deltaTime;
+
+        transform.eulerAngles = rotation;
         transform.position += KeyboardInput() * movementSpeed * Time.deltaTime;
     }
 
     Vector3 mouseInput()
     {
-        return new Vector2( -Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        float xLook = -Input.GetAxis("Mouse Y");
+        float yLook = Input.GetAxis("Mouse X");
+
+        return new Vector2( xLook, yLook);
     }
     Vector3 KeyboardInput()
     {
