@@ -1517,8 +1517,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083986268}
-  - component: {fileID: 1083986267}
   - component: {fileID: 1083986269}
+  - component: {fileID: 1083986267}
+  - component: {fileID: 1083986270}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1585,6 +1586,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1083986270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083986266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571de3913dced91418ecb5d5c0b46a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerWeapon
+  currentAmmo: 5
+  extraAmmo: 5
+  weaponRange: 5
 --- !u!1 &1252600892
 GameObject:
   m_ObjectHideFlags: 0
