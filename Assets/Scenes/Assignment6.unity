@@ -2054,7 +2054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::playerWeapon
   currentAmmo: 5
   extraAmmo: 50
-  weaponRange: 5
+  weaponRange: 10
   weaponCoolDown: 0.2
   accuracyValue: {fileID: 11400000, guid: d1a72acda2062494bb72772b121ad812, type: 2}
   AudioSource: {fileID: 1873848545}
@@ -3235,7 +3235,7 @@ RectTransform:
   m_GameObject: {fileID: 1814719939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.07620831, y: 0.07620831, z: 0.07620831}
+  m_LocalScale: {x: 0.099108905, y: 0.099108905, z: 0.099108905}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 119222986}
@@ -3265,7 +3265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
