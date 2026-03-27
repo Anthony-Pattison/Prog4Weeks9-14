@@ -8,6 +8,7 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float mouseSens;
     public GameObject cameraTransform;
+    playerWeapon currPlayerWeapon;
     Rigidbody thisRB;
     Transform orientation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,6 +16,10 @@ public class playerScript : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         thisRB = GetComponent<Rigidbody>();
+        if (GetComponent<playerWeapon>())
+        {
+            currPlayerWeapon = GetComponent<playerWeapon>();
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +28,7 @@ public class playerScript : MonoBehaviour
         Vector3 rotation = transform.eulerAngles;
         rotation += mouseInput() * mouseSens * Time.deltaTime;
 
+        currPlayerWeapon._movement = KeyboardInput();
         transform.eulerAngles = rotation;
         transform.position += KeyboardInput() * movementSpeed * Time.deltaTime;
     }
