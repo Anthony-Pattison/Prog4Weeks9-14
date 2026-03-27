@@ -5,10 +5,8 @@ using UnityEngine.Audio;
 public class playerWeapon : MonoBehaviour
 {
     [Header("Player Weapon")]
-    [SerializeField]
-    float currentAmmo = 5;
-    [SerializeField]
-    float extraAmmo = 5;
+    public float currentAmmo = 5;
+    public float extraAmmo = 5;
     [SerializeField]
     float weaponRange = 5;
     [SerializeField]
@@ -16,14 +14,14 @@ public class playerWeapon : MonoBehaviour
     public AudioSource AudioSource;
     public AudioClip gunShotAC;
 
-
+    int clipMax = 6;
     bool firedWeapon = false;
     Vector3 orgin;
     Vector3 direction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -31,6 +29,11 @@ public class playerWeapon : MonoBehaviour
     {
         drawRange();
         weaponInput();
+
+        if (currentAmmo <= 0 && !firedWeapon)
+        {
+            StartCoroutine(reloadWeapon());
+        }
     }
     void weaponInput()
     {
@@ -45,12 +48,20 @@ public class playerWeapon : MonoBehaviour
     {
         Debug.DrawRay(orgin, direction * weaponRange, Color.red);
     }
-    
+    IEnumerator reloadWeapon()
+    {
+        firedWeapon = true;
+        yield return new WaitForSeconds(3);
+        currentAmmo = clipMax;
+        extraAmmo -= clipMax;
+        firedWeapon = false;
+    }
     IEnumerator fireWeapon()
     {
         RaycastHit hit;
         firedWeapon = true;
         AudioSource.PlayOneShot(gunShotAC);
+        currentAmmo--;
         if (Physics.Raycast(orgin, direction, out hit, weaponRange))
         {
             Debug.Log(hit.collider.name);
