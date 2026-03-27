@@ -24,7 +24,6 @@ public class playerWeapon : MonoBehaviour
     readonly float lowAcc = 0.5f;
     readonly float medAcc = 1.0f;
     readonly float highAcc = 5.0f;
-
     public Vector3 _movement;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -73,14 +72,24 @@ public class playerWeapon : MonoBehaviour
         firedWeapon = true;
         AudioSource.PlayOneShot(gunShotAC);
         currentAmmo--;
+
+        // direction based on the accuracy
+        Debug.Log(direction);
+        if (!isAccuracyLow())
+        {
+            direction.x += Random.Range(-0.10f, 0.10f);
+            direction.y += Random.Range(-0.10f, 0.10f);
+        }
         if (Physics.Raycast(orgin, direction, out hit, weaponRange))
         {
-            Debug.Log(hit.collider.name);
+            
+            
+            
             if (hit.collider != null)
             {
                 if (hit.collider.CompareTag("cover"))
                 {
-                    Debug.Log($"hit {hit.collider.gameObject.name} at {transform.forward.z * weaponRange}m away");
+                    //Debug.Log($"hit {hit.collider.gameObject.name} at {transform.forward.z * weaponRange}m away");
                     GameObject _tempBullet = Instantiate(bulletHole, hit.point, Quaternion.identity);
 
                     Vector3 direction = (transform.position - _tempBullet.transform.position).normalized;
@@ -103,5 +112,14 @@ public class playerWeapon : MonoBehaviour
         {
             accuracyValue.value = lowAcc;
         }
+    }
+
+    bool isAccuracyLow()
+    {
+        if (accuracyValue.value == highAcc)
+        {
+            return true;
+        }
+        return false;
     }
 }
