@@ -48,7 +48,7 @@ public class playerWeapon : MonoBehaviour
     {
         orgin = transform.position + transform.forward + (transform.up);
         direction = transform.forward;
-        if (Input.GetMouseButton(0) && !firedWeapon)
+        if (Input.GetMouseButton(0) && !firedWeapon && currentAmmo > 0)
         {
             StartCoroutine(fireWeapon());
         }
