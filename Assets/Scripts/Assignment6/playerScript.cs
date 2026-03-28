@@ -9,8 +9,8 @@ public class playerScript : MonoBehaviour
     float mouseSens;
     public GameObject cameraTransform;
     playerWeapon currPlayerWeapon;
+
     Rigidbody thisRB;
-    Transform orientation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +31,20 @@ public class playerScript : MonoBehaviour
         currPlayerWeapon._movement = KeyboardInput();
         transform.eulerAngles = rotation;
         transform.position += KeyboardInput() * movementSpeed * Time.deltaTime;
+
+        crouch();
+    }
+
+    void crouch()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))
+        {
+            transform.localScale = new Vector3(1, .25f, 1);
+            currPlayerWeapon.crouchDiff = new Vector3(0, .75f, 0);
+            return;
+        }
+        currPlayerWeapon.crouchDiff = Vector3.zero;
+        transform.localScale = Vector3.one;
     }
 
     Vector3 mouseInput()

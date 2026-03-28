@@ -20,7 +20,7 @@ public class playerWeapon : MonoBehaviour
     bool firedWeapon = false;
     Vector3 orgin;
     Vector3 direction;
-
+    public Vector3 crouchDiff = Vector3.zero;
     readonly float lowAcc = 0.5f;
     readonly float medAcc = 1.0f;
     readonly float highAcc = 5.0f;
@@ -35,8 +35,8 @@ public class playerWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        drawRange();
         weaponInput();
+        drawRange();
         changeAccuracy();
 
         if (currentAmmo <= 0 && !firedWeapon)
@@ -44,9 +44,10 @@ public class playerWeapon : MonoBehaviour
             StartCoroutine(reloadWeapon());
         }
     }
+  
     void weaponInput()
     {
-        orgin = transform.position + transform.forward + (transform.up);
+        orgin = (transform.position + transform.forward + (transform.up)) - crouchDiff;
         direction = transform.forward;
         if (Input.GetMouseButton(0) && !firedWeapon && currentAmmo > 0)
         {

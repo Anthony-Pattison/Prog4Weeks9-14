@@ -7,6 +7,7 @@ public class bulletHole : MonoBehaviour
     void Start()
     {
         StartCoroutine(fadeOut());
+        
     }
     IEnumerator fadeOut()
     {
