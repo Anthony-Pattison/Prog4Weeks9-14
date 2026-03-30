@@ -8,6 +8,7 @@ namespace NodeCanvas.Tasks.Actions {
 
 	public class moveToAT : ActionTask {
 		public BBParameter<Vector3> moveTo;
+		public float stoppingDistance = 4;
         NavMeshAgent thisNavAgent;
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -25,6 +26,11 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
 			thisNavAgent.SetDestination(moveTo.value);
+
+			if (Vector3.Distance(agent.transform.position, moveTo.value) < stoppingDistance)
+			{
+				EndAction();
+			}
 		}
 
 		//Called when the task is disabled.

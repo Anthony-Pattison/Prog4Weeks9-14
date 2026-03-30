@@ -11,10 +11,12 @@ public class playerWeapon : MonoBehaviour
     float weaponRange = 5;
     [SerializeField]
     float weaponCoolDown = 0.25f;
+    [Header("Looking at")]
+    public GameObject lookingAt;
+    [Header("Assets")]
     public valueObject accuracyValue;
     public AudioSource AudioSource;
     public AudioClip gunShotAC;
-
     public GameObject bulletHole;
     int clipMax = 6;
     bool firedWeapon = false;
@@ -57,6 +59,14 @@ public class playerWeapon : MonoBehaviour
     void drawRange()
     {
         Debug.DrawRay(orgin, direction * weaponRange, Color.red);
+        if (Physics.Raycast(orgin, direction, out RaycastHit hit, weaponRange))
+        {
+            lookingAt = hit.collider.gameObject;
+        }
+        else
+        {
+            lookingAt = null;   
+        }
     }
     IEnumerator reloadWeapon()
     {
@@ -75,7 +85,6 @@ public class playerWeapon : MonoBehaviour
         currentAmmo--;
 
         // direction based on the accuracy
-        Debug.Log(direction);
         if (!isAccuracyLow())
         {
             direction.x += Random.Range(-0.10f, 0.10f);
@@ -83,9 +92,6 @@ public class playerWeapon : MonoBehaviour
         }
         if (Physics.Raycast(orgin, direction, out hit, weaponRange))
         {
-            
-            
-            
             if (hit.collider != null)
             {
                 if (hit.collider.CompareTag("cover"))
