@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class slimScript : MonoBehaviour
 {
+    Transform player;
+    LineRenderer lineRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        lineRenderer = GetComponent<LineRenderer>();
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position, transform.position + (transform.forward * 4) - (Vector3.right * -2), Color.red);
-        Debug.DrawLine(transform.position, transform.position + (transform.forward * 6) - (Vector3.right * 2), Color.red);
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, player.position);
     }
 }
