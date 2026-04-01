@@ -25,8 +25,8 @@ namespace NodeCanvas.Tasks.Actions
         void calculateAttackPlayerMovement()
         {
             playerLocation = playerTransform.value.position;
-            leftOfPlayer = playerLocation - Vector3.left * 2;
-            rightOfPlayer = playerLocation + Vector3.right * 2;
+            leftOfPlayer = playerLocation - Vector3.left * 10;
+            rightOfPlayer = playerLocation + Vector3.right * 10;
         }
 
         //Use for initialization. This is called only once in the lifetime of the task.
@@ -44,10 +44,13 @@ namespace NodeCanvas.Tasks.Actions
         {
             if (moveToPlayer)
             {
-                Vector3[] possibleLocation = new Vector3[]{leftOfPlayer, rightOfPlayer, playerLocation};
                 calculateAttackPlayerMovement();
+
+                Vector3[] possibleLocation = new Vector3[]{leftOfPlayer, rightOfPlayer, playerLocation};
                 for (int i = 0; i < 2; i++)
                 {
+                    Debug.Log("found a position");
+
                     if (thisNavAgent.SetDestination(possibleLocation[i]))
                     {
                         moveTo.value = possibleLocation[i];
