@@ -12,6 +12,7 @@ public class playerWeapon : MonoBehaviour
     [SerializeField]
     float weaponCoolDown = 0.25f;
     [Header("Looking at")]
+    public Transform playerCamera;
     public GameObject lookingAt;
     [Header("Assets")]
     public valueObject accuracyValue;
@@ -49,7 +50,7 @@ public class playerWeapon : MonoBehaviour
   
     void weaponInput()
     {
-        orgin = (transform.position + transform.forward + (transform.up)) - crouchDiff;
+        orgin = (playerCamera.position) - crouchDiff;
         direction = transform.forward;
         if (Input.GetMouseButton(0) && !firedWeapon && currentAmmo > 0)
         {
@@ -101,7 +102,8 @@ public class playerWeapon : MonoBehaviour
 
                     Vector3 direction = (transform.position - _tempBullet.transform.position).normalized;
                     _tempBullet.transform.position += (direction / 10);
-                    _tempBullet.transform.eulerAngles = hit.collider.transform.eulerAngles;
+                    Quaternion rotation = Quaternion.LookRotation(direction);
+                    _tempBullet.transform.rotation = rotation;
                 }
             }
         }
