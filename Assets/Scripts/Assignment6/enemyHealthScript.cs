@@ -25,6 +25,7 @@ public class enemyHealthScript : MonoBehaviour
     {
         if(targetName != this.gameObject.name)
             return;
+        GetComponent<ParticleSystem>().Play();
         currentHeath -= incomingDamage;
         if (currentHeath <= 0)
         {

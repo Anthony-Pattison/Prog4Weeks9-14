@@ -121,7 +121,7 @@ public class playerScript : MonoBehaviour
     bool checkForCollison(Vector3 direction)
     {
         RaycastHit hit;
-        Debug.DrawRay((transform.position - new Vector3(0, transform.localScale.y, 0)), direction * collisonCheckDistance, Color.red);
+        Debug.DrawRay((transform.position - new Vector3(0, transform.localScale.y/2, 0)), direction * collisonCheckDistance, Color.red);
         if (Physics.Raycast((transform.position - new Vector3(0,transform.localScale.y/2,0)), direction, out hit, collisonCheckDistance))
         {
             return true;

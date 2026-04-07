@@ -24,6 +24,7 @@ namespace NodeCanvas.Tasks.Actions {
         {
             if (Vector3.Distance(agent.transform.position, playerTransformBBP.value.position) < attackDistance)
             {
+				zomDogAnimator.SetTrigger("attackTrigger");
                 Eventcore.playerDamage.Invoke(damageAmount);
 				EndAction();
             }
