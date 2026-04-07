@@ -2,6 +2,7 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 
 namespace NodeCanvas.Tasks.Actions {
@@ -25,13 +26,13 @@ namespace NodeCanvas.Tasks.Actions {
             {
                 EndAction();
             }
-            moveTo = (agent.transform.forward * 3) + (agent.transform.right);
+            moveTo = randomPosition();
             thisNavAgent.SetDestination(moveTo);
         }
 
 		//Called once per frame while the action is active.
 		protected override void OnUpdate() {
-            if (Vector3.Distance(agent.transform.position, moveTo) < 5)
+            if (Vector3.Distance(agent.transform.position, moveTo) < 2)
             {
                 EndAction();
             }
@@ -46,6 +47,24 @@ namespace NodeCanvas.Tasks.Actions {
 		protected override void OnPause() {
 			
 		}
+
+        Vector3 randomPosition()
+        {
+            Vector3 agentPosition = agent.transform.position;
+            Vector3 randomPosition = 2 * Random.insideUnitSphere + (agentPosition + (agent.transform.forward * 3));
+            Vector3 returnValue = Vector3.zero;
+
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 5, NavMesh.AllAreas))
+            {
+                returnValue = hit.position;
+            }
+            else
+            {
+                returnValue = (agent.transform.forward * 3) + (agent.transform.right);
+            }
+
+            return returnValue;
+        }
 
         bool searchAnArea(Vector3 center, float radius)
         {

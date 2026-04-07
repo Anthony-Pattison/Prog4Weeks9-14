@@ -18,11 +18,15 @@ namespace NodeCanvas.Tasks.Actions {
 		}
 
 		protected override void OnExecute() {
-			if (Vector3.Distance(agent.transform.position, playerTransformBBP.value.position) < attackDistance)
-			{
-				Eventcore.playerDamage.Invoke(damageAmount);
-			}
+			
 		}
-
+        protected override void OnUpdate()
+        {
+            if (Vector3.Distance(agent.transform.position, playerTransformBBP.value.position) < attackDistance)
+            {
+                Eventcore.playerDamage.Invoke(damageAmount);
+				EndAction();
+            }
+        }
 	}
 }

@@ -78,7 +78,6 @@ public class playerScript : MonoBehaviour
         {
             xLook = Mathf.Clamp(xLook, 0, 1);
         }
-        print(transform.eulerAngles);
         return new Vector2( xLook, yLook);
     }
     Vector3 KeyboardInput()

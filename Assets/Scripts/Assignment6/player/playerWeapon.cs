@@ -18,7 +18,9 @@ public class playerWeapon : MonoBehaviour
     public valueObject accuracyValue;
     public AudioSource AudioSource;
     public AudioClip gunShotAC;
+    public AudioClip gunReloadAC;
     public GameObject bulletHole;
+    public float weaponDamge;
     int clipMax = 6;
     bool firedWeapon = false;
     Vector3 orgin;
@@ -29,10 +31,12 @@ public class playerWeapon : MonoBehaviour
     readonly float highAcc = 5.0f;
     public Vector3 _movement;
 
+    eventCore EventCore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
+        EventCore.EV_increasePlayerAmmo.AddListener(increaseAmmo);
     }
 
     // Update is called once per frame
@@ -71,9 +75,10 @@ public class playerWeapon : MonoBehaviour
     }
     IEnumerator reloadWeapon()
     {
+        AudioSource.PlayOneShot(gunReloadAC);
         float _newAmmo = Mathf.Clamp(extraAmmo, 0, clipMax);
         firedWeapon = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         currentAmmo = _newAmmo;
         extraAmmo -= _newAmmo;
         firedWeapon = false;
@@ -95,6 +100,10 @@ public class playerWeapon : MonoBehaviour
         {
             if (hit.collider != null)
             {
+                if (hit.collider.CompareTag("enemy"))
+                {
+                    EventCore.EV_enemyDamage.Invoke(hit.collider.gameObject.name, weaponDamge);
+                }
                 if (hit.collider.CompareTag("cover"))
                 {
                     //Debug.Log($"hit {hit.collider.gameObject.name} at {transform.forward.z * weaponRange}m away");
@@ -130,5 +139,9 @@ public class playerWeapon : MonoBehaviour
             return true;
         }
         return false;
+    }
+    void increaseAmmo(float increaseAmount)
+    {
+        extraAmmo += increaseAmount;
     }
 }

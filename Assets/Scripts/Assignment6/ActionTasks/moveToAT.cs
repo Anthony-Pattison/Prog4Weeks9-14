@@ -25,8 +25,8 @@ namespace NodeCanvas.Tasks.Actions
         void calculateAttackPlayerMovement()
         {
             playerLocation = playerTransform.value.position;
-            leftOfPlayer = playerLocation - Vector3.left * 10;
-            rightOfPlayer = playerLocation + Vector3.right * 10;
+            leftOfPlayer = playerLocation - Vector3.left * 5;
+            rightOfPlayer = playerLocation + Vector3.right * 5;
         }
 
         //Use for initialization. This is called only once in the lifetime of the task.
@@ -67,7 +67,8 @@ namespace NodeCanvas.Tasks.Actions
             {
                 agent.transform.LookAt(playerTransform.value.position);
             }
-            if (Vector3.Distance(agent.transform.position, moveTo.value) < stoppingDistance)
+            if (Vector3.Distance(agent.transform.position, playerLocation) < stoppingDistance || 
+                Vector3.Distance(agent.transform.position, moveTo.value) < stoppingDistance)
             {
                 EndAction();
             }
