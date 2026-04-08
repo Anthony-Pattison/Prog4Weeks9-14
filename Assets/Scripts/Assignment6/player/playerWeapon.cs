@@ -45,7 +45,8 @@ public class playerWeapon : MonoBehaviour
         weaponInput();
         drawRange();
         changeAccuracy();
-
+        if (Input.GetKeyDown(KeyCode.R))
+            StartCoroutine(reloadWeapon());
         if (currentAmmo <= 0 && !firedWeapon)
         {
             StartCoroutine(reloadWeapon());
@@ -77,10 +78,11 @@ public class playerWeapon : MonoBehaviour
     {
         AudioSource.PlayOneShot(gunReloadAC);
         float _newAmmo = Mathf.Clamp(extraAmmo, 0, clipMax);
+        float usedAmmo = _newAmmo - currentAmmo;
         firedWeapon = true;
         yield return new WaitForSeconds(2);
         currentAmmo = _newAmmo;
-        extraAmmo -= _newAmmo;
+        extraAmmo -= usedAmmo;
         firedWeapon = false;
     }
     IEnumerator fireWeapon()
@@ -100,6 +102,10 @@ public class playerWeapon : MonoBehaviour
         {
             if (hit.collider != null)
             {
+                if (hit.collider.CompareTag("target"))
+                {
+                    EventCore.EV_targetShot.Invoke(hit.collider.gameObject.name);
+                }
                 if (hit.collider.CompareTag("enemy"))
                 {
                     EventCore.EV_enemyDamage.Invoke(hit.collider.gameObject.name, weaponDamge);

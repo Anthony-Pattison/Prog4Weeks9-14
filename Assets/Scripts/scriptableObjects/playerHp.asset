@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17af847bade6914785aad62fc8dcd83, type: 3}
   m_Name: playerHp
   m_EditorClassIdentifier: Assembly-CSharp::valueObject
-  value: 50
+  value: 8.6
