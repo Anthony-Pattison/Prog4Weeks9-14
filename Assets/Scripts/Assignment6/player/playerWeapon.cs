@@ -76,6 +76,7 @@ public class playerWeapon : MonoBehaviour
     }
     IEnumerator reloadWeapon()
     {
+        EventCore.EV_playerReload.Invoke();
         AudioSource.PlayOneShot(gunReloadAC);
         float _newAmmo = Mathf.Clamp(extraAmmo, 0, clipMax);
         float usedAmmo = _newAmmo - currentAmmo;
@@ -91,7 +92,7 @@ public class playerWeapon : MonoBehaviour
         firedWeapon = true;
         AudioSource.PlayOneShot(gunShotAC);
         currentAmmo--;
-
+        EventCore.EV_playerShoot.Invoke();
         // direction based on the accuracy
         if (!isAccuracyLow())
         {

@@ -12,4 +12,8 @@ public class eventCore : MonoBehaviour
     public UnityEvent<string, float> EV_increaseHealth;
 
     public UnityEvent<string> EV_targetShot;
+
+    public UnityEvent EV_playerReload;
+
+    public UnityEvent EV_playerShoot;
 }
