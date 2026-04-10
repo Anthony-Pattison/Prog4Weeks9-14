@@ -27,7 +27,7 @@ public class playerWeapon : MonoBehaviour
     Vector3 direction;
     public Vector3 crouchDiff = Vector3.zero;
     readonly float lowAcc = 0.5f;
-    readonly float medAcc = 1.0f;
+    //readonly float medAcc = 1.0f;
     readonly float highAcc = 5.0f;
     public Vector3 _movement;
 
