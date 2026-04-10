@@ -1,3 +1,4 @@
+using NodeCanvas.Tasks.Actions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,26 +14,29 @@ public class multiTargetManager : MonoBehaviour
     void Start()
     {
         EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
-        EventCore.EV_targetShot.AddListener(checkAllTargets);
     }
-
-    void checkAllTargets(string targetName)
+    private void Update()
     {
-        for(int i = 0; i < targetNeeded.Length; i++)
+        checkAllTargets();
+    }
+    void checkAllTargets()
+    {
+        targetsGotten = 0;
+        for (int i = 0; i < targetNeeded.Length; i++)
         {
-            if (targetName == targetNeeded[i].name)
+
+            if (!targetNeeded[i].hasBeenShot)
+                return;
+            targetsGotten++;
+            print($"got {targetsGotten} needed {targetNeeded.Length}");
+
+            if (targetsGotten == targetNeeded.Length)
             {
-                if (!targetNeeded[i].hasBeenShot)
-                    targetsGotten++;
-                print($"got {targetsGotten} needed {targetNeeded.Length}");
-                if (targetsGotten == targetNeeded.Length)
-                {
-                    unlockAbleDoor.GetComponent<Animator>().SetTrigger(animationTrigger);
-                    this.enabled = false;
-                }
-                continue;
+                unlockAbleDoor.GetComponent<Animator>().SetTrigger(animationTrigger);
+                this.enabled = false;
             }
+
         }
 
-    } 
+    }
 }

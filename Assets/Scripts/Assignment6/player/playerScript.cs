@@ -1,3 +1,4 @@
+using Unity.VectorGraphics;
 using UnityEngine;
 
 public class playerScript : MonoBehaviour
@@ -13,9 +14,11 @@ public class playerScript : MonoBehaviour
     public float collisonCheckDistance = 1.5f;
     Rigidbody thisRB;
     float sprintSpeedMulit = 1;
+    Vector3 playerStart;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerStart = transform.position;
         Cursor.lockState = CursorLockMode.Locked;
         thisRB = GetComponent<Rigidbody>();
         if (GetComponent<playerWeapon>())
@@ -27,6 +30,8 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //for the player falling out of the world
+        killFloor();
         // check player crouch
         crouch();
         // check player sprint
@@ -44,6 +49,13 @@ public class playerScript : MonoBehaviour
         transform.position += KeyboardInput() * movementSpeed * sprintSpeedMulit * Time.deltaTime;
     }
 
+    void killFloor()
+    {
+        if (transform.position.y <= -10)
+        {
+            transform.position = playerStart;
+        }
+    }
     void crouch()
     {
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C))

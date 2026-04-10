@@ -20,7 +20,7 @@ namespace NodeCanvas.Tasks.Conditions {
 
 			if (timer > amountOfSeconds) 
 				return true;
-			timer += Time.deltaTime;
+			timer += 1 * Time.deltaTime;
 			return false;
 		}
 	}
