@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class flyingCannonBounce : MonoBehaviour
 {
     public AnimationCurve bounceCurve;
+    public GameObject bulletBall;
+    public float waitTime = 0.1f;
     float time;
     Vector3 top;
     Vector3 bottom;
@@ -26,5 +29,25 @@ public class flyingCannonBounce : MonoBehaviour
         time += 0.25f * Time.deltaTime;
         if(time>=1)
             time = 0;
+    }
+
+    public void growBall()
+    {
+        StartCoroutine(growBallCorutine());
+    }
+
+    IEnumerator growBallCorutine()
+    {
+        float amount = 0;
+        bulletBall.transform.localScale = Vector3.zero;
+        bulletBall.SetActive(true);
+
+        while (amount < 1)
+        {
+            amount += 0.5f * Time.deltaTime;
+            bulletBall.transform.localScale = new Vector3(amount, amount, amount);
+            yield return new WaitForSeconds(waitTime);
+        }
+        bulletBall.SetActive(false);
     }
 }
