@@ -37,6 +37,8 @@ public class playerWeapon : MonoBehaviour
     {
         EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
         EventCore.EV_increasePlayerAmmo.AddListener(increaseAmmo);
+        EventCore.EV_pauseGame.AddListener(pauseThis);
+        EventCore.EV_unPauseGame.AddListener(unPauseThis);
     }
 
     // Update is called once per frame
@@ -150,5 +152,15 @@ public class playerWeapon : MonoBehaviour
     void increaseAmmo(float increaseAmount)
     {
         extraAmmo += increaseAmount;
+    }
+
+    void pauseThis()
+    {
+        this.enabled = false;
+    }
+
+    void unPauseThis()
+    {
+        this.enabled = true;
     }
 }

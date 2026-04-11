@@ -87,7 +87,10 @@ namespace NodeCanvas.Tasks.Actions
 
         protected override void OnStop()
         {
-            StopCoroutine(shooting);
+            if (shooting != null)
+            {
+                StopCoroutine(shooting);
+            }
         }
 
         private float calculateDegAngleFormVector(Vector3 position)

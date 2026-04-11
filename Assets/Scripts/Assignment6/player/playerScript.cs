@@ -15,6 +15,13 @@ public class playerScript : MonoBehaviour
     Rigidbody thisRB;
     float sprintSpeedMulit = 1;
     Vector3 playerStart;
+
+    //UI//
+    public void mouseSensChange(float change)
+    {
+        mouseSens = change;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -133,8 +140,8 @@ public class playerScript : MonoBehaviour
     bool checkForCollison(Vector3 direction)
     {
         RaycastHit hit;
-        Debug.DrawRay((transform.position - new Vector3(0, transform.localScale.y/2, 0)), direction * collisonCheckDistance, Color.red);
-        if (Physics.Raycast((transform.position - new Vector3(0,transform.localScale.y/2,0)), direction, out hit, collisonCheckDistance))
+        Debug.DrawRay((transform.position), direction * collisonCheckDistance, Color.red);
+        if (Physics.Raycast((transform.position), direction, out hit, collisonCheckDistance))
         {
             return true;
         }

@@ -36,13 +36,13 @@ public class CameraAnimation : MonoBehaviour
         cameraShakeAmount = cameraAni.cameraShakeAmount;
 
         print("set up the camera");
-        if (GameObject.Find("FadeToBlackBox(Clone)") == null)
+        if (GameObject.Find("FadeToBlackBox") == null)
         {
             tempCanvus = Instantiate(cameraFade.fadeBoxPrefab, camTransform);
         }
         else
         {
-            tempCanvus = GameObject.Find("FadeToBlackBox(Clone)");
+            tempCanvus = GameObject.Find("FadeToBlackBox");
         }
 
         cameraFade.fadeBox = tempCanvus.transform.Find("FadeOutbox").GetComponent<Image>();

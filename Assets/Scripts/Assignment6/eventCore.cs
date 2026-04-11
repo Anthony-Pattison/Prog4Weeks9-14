@@ -16,4 +16,8 @@ public class eventCore : MonoBehaviour
     public UnityEvent EV_playerReload;
 
     public UnityEvent EV_playerShoot;
+
+    public UnityEvent EV_pauseGame;
+
+    public UnityEvent EV_unPauseGame;
 }
