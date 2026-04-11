@@ -8,15 +8,23 @@ namespace NodeCanvas.Tasks.Conditions {
 	public class playerInfrontTurretCT : ConditionTask {
 		public BBParameter<Transform> playerTransformBBP;
 		public GameObject turretHead;
+		public float playAnimationDistance = 15.0f;
+		public float shootingDistance = 10.0f;
+		Quaternion baseRotation;
+		Animator turretHeadAnimator;
 		//Use for initialization. This is called only once in the lifetime of the task.
 		//Return null if init was successfull. Return an error string otherwise
 		protected override string OnInit(){
-			return null;
+			baseRotation = agent.transform.rotation;
+			Debug.Log(baseRotation);
+            turretHeadAnimator = turretHead.GetComponent<Animator>();
+
+            return null;
 		}
 
 		//Called whenever the condition gets enabled.
 		protected override void OnEnable() {
-			turretHead.transform.eulerAngles = new Vector3(0, -270, 0);
+			turretHead.transform.rotation = baseRotation;
 		}
 
 		//Called whenever the condition gets disabled.
@@ -27,10 +35,7 @@ namespace NodeCanvas.Tasks.Conditions {
 		//Called once per frame while the condition is active.
 		//Return whether the condition is success or failure.
 		protected override bool OnCheck() {
-			Debug.DrawLine(agent.transform.position, playerTransformBBP.value.position);
-			Debug.DrawLine(agent.transform.position, Vector3.zero);
-			Debug.DrawLine(playerTransformBBP.value.position, Vector3.zero);
-
+			float distance = Vector3.Distance(agent.transform.position, playerTransformBBP.value.position);
 			Vector3 direction = (playerTransformBBP.value.position - agent.transform.position).normalized;
 
 			float upAngel = calculateDegAngleFormVector(agent.transform.up);
@@ -39,7 +44,15 @@ namespace NodeCanvas.Tasks.Conditions {
 			float deltaAngle = Mathf.DeltaAngle(upAngel, directionAngle);
 			float sign = Mathf.Sign(deltaAngle);
 
-			if (deltaAngle > 0)
+			if (distance < playAnimationDistance)
+			{
+				turretHeadAnimator.SetBool("firing", true);
+			}
+			else
+			{
+                turretHeadAnimator.SetBool("firing", false);
+            }
+            if (deltaAngle < 0 && distance < shootingDistance)
 			{
 				Debug.Log("Infront of me");
 				return true;

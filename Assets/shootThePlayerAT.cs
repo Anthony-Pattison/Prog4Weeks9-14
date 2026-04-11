@@ -19,7 +19,7 @@ namespace NodeCanvas.Tasks.Actions
         public bool dontLookAtPlayer = false;
         eventCore EventCore;
         AudioSource AudioSource;
-
+        bool shootingCatch = false;
         Coroutine shooting;
         //Use for initialization. This is called only once in the lifetime of the task.
         //Return null if init was successfull. Return an error string otherwise
@@ -55,6 +55,9 @@ namespace NodeCanvas.Tasks.Actions
 
        IEnumerator turretShooting()
         {
+            if(shootingCatch)
+                yield break;
+            shootingCatch = true;
             while (true) {
                 RaycastHit hit;
 
@@ -76,8 +79,8 @@ namespace NodeCanvas.Tasks.Actions
 
                 float deltaAngle = Mathf.DeltaAngle(upAngel, directionAngle);
                 float sign = Mathf.Sign(deltaAngle);
-
-                if (deltaAngle < 0)
+                float distance = Vector3.Distance(agent.transform.position, playerTransformBBP.value.position);
+                if (deltaAngle > 0 || distance > 10)
                 {
                     EndAction(true);
                 }
@@ -87,9 +90,10 @@ namespace NodeCanvas.Tasks.Actions
 
         protected override void OnStop()
         {
-            if (shooting != null)
+            if (shooting != null && shootingCatch)
             {
                 StopCoroutine(shooting);
+                shootingCatch = false;
             }
         }
 

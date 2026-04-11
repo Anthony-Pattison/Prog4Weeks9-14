@@ -48,9 +48,9 @@ public class playerScript : MonoBehaviour
 
         // player looking 
         Vector3 rotation = transform.eulerAngles;
-        rotation += mouseInput() * mouseSens * Time.deltaTime;
+        rotation += mouseInput();
 
-        transform.eulerAngles = rotation;
+        transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
 
 
         transform.position += KeyboardInput() * movementSpeed * sprintSpeedMulit * Time.deltaTime;
@@ -87,8 +87,8 @@ public class playerScript : MonoBehaviour
     }
     Vector3 mouseInput()
     {
-        float xLook = -Input.GetAxis("Mouse Y");
-        float yLook = Input.GetAxis("Mouse X");
+        float xLook = -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSens;
+        float yLook = Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSens;
         if (transform.eulerAngles.x >= 80 && transform.eulerAngles.x <= 90)
         {
             xLook = Mathf.Clamp(xLook, -1, 0);
