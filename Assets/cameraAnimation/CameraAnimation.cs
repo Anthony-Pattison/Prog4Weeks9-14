@@ -35,7 +35,17 @@ public class CameraAnimation : MonoBehaviour
         animatedCurve = cameraAni.animatedCurve;
         cameraShakeAmount = cameraAni.cameraShakeAmount;
 
-        
+        print("set up the camera");
+        if (GameObject.Find("FadeToBlackBox(Clone)") == null)
+        {
+            tempCanvus = Instantiate(cameraFade.fadeBoxPrefab, camTransform);
+        }
+        else
+        {
+            tempCanvus = GameObject.Find("FadeToBlackBox(Clone)");
+        }
+
+        cameraFade.fadeBox = tempCanvus.transform.Find("FadeOutbox").GetComponent<Image>();
 
         // getting and setting references
         if (findMainCamera)
@@ -78,16 +88,7 @@ public class CameraAnimation : MonoBehaviour
     {
         if (corutineRunning)
             return;
-        if (GameObject.Find("FadeToBlackBox(Clone)") == null)
-        {
-            tempCanvus = Instantiate(cameraFade.fadeBoxPrefab, camTransform);
-        }
-        else
-        {
-            tempCanvus = GameObject.Find("FadeToBlackBox(Clone)");
-        }
-
-        cameraFade.fadeBox = tempCanvus.transform.Find("FadeOutbox").GetComponent<Image>();
+     
 
         camAnimation = StartCoroutine(camMovement());
     }
