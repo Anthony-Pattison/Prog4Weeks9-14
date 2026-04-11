@@ -20,4 +20,6 @@ public class eventCore : MonoBehaviour
     public UnityEvent EV_pauseGame;
 
     public UnityEvent EV_unPauseGame;
+
+    public UnityEvent<onScreenText> EV_upgradePickUp;
 }

@@ -7,6 +7,7 @@ public class playerWeapon : MonoBehaviour
     [Header("Player Weapon")]
     public float currentAmmo = 5;
     public float extraAmmo = 5;
+    public int clipMax = 6;
     [SerializeField]
     float weaponRange = 5;
     [SerializeField]
@@ -21,7 +22,6 @@ public class playerWeapon : MonoBehaviour
     public AudioClip gunReloadAC;
     public GameObject bulletHole;
     public float weaponDamge;
-    int clipMax = 6;
     bool firedWeapon = false;
     Vector3 orgin;
     Vector3 direction;
