@@ -4,6 +4,7 @@ public class gunUpGrade : MonoBehaviour
 {
     public int newClipAmount;
     public onScreenText itemText;
+    public gunValue gunToLevelUp;
     public GameObject playerObject;
     eventCore EventCore;
     void Start()
@@ -16,8 +17,8 @@ public class gunUpGrade : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
         GameObject player = playerObject;
-        player.GetComponent<playerWeapon>().clipMax = newClipAmount;
-        player.GetComponent<playerWeapon>().currentAmmo = newClipAmount;
+        gunToLevelUp.maxAmmo = newClipAmount;
+        gunToLevelUp.currentAmmo = newClipAmount;
         EventCore.EV_upgradePickUp.Invoke(itemText);
     }
 }

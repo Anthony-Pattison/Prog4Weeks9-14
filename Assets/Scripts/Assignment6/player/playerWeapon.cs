@@ -1,10 +1,14 @@
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class playerWeapon : MonoBehaviour
 {
     [Header("Player Weapon")]
+    public gunValue[] weaponInventory;
+    public gunValue gunInHand;
     public float currentAmmo = 5;
     public float extraAmmo = 5;
     public int clipMax = 6;
@@ -12,6 +16,8 @@ public class playerWeapon : MonoBehaviour
     float weaponRange = 5;
     [SerializeField]
     float weaponCoolDown = 0.25f;
+    public GameObject pistolHands;
+    public GameObject rifleHands;
     [Header("Looking at")]
     public Transform playerCamera;
     public GameObject lookingAt;
@@ -30,7 +36,7 @@ public class playerWeapon : MonoBehaviour
     //readonly float medAcc = 1.0f;
     readonly float highAcc = 5.0f;
     public Vector3 _movement;
-
+    public bool pistolOut = true;
     eventCore EventCore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,14 +53,54 @@ public class playerWeapon : MonoBehaviour
         weaponInput();
         drawRange();
         changeAccuracy();
-        if (Input.GetKeyDown(KeyCode.R))
+        changeWeapon();
+        if (Input.GetKeyDown(KeyCode.R) && !firedWeapon && extraAmmo != 0)
             StartCoroutine(reloadWeapon());
-        if (currentAmmo <= 0 && !firedWeapon)
+        if (currentAmmo <= 0 && !firedWeapon && extraAmmo != 0)
         {
             StartCoroutine(reloadWeapon());
         }
     }
-  
+
+    void changeWeapon()
+    {
+        currentAmmo = gunInHand.currentAmmo;
+        extraAmmo = gunInHand.extraAmmo;
+        clipMax = gunInHand.maxAmmo;
+        weaponRange = gunInHand.weaponRange;
+        weaponCoolDown = gunInHand.weaponCoolDown;
+
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            if (gunInHand.weapon == weapon.pistol)
+            {
+                foreach(gunValue weapon in weaponInventory)
+                {
+                    if (weapon.weapon == global::weapon.rifle)
+                    {
+                        pistolHands.SetActive(false);
+                        rifleHands.SetActive(true);
+                        gunInHand = weapon;
+                        return;
+                    }
+                }
+            }
+            if (gunInHand.weapon == weapon.rifle)
+            {
+                foreach (gunValue weapon in weaponInventory)
+                {
+                    if (weapon.weapon == global::weapon.pistol)
+                    {
+                        pistolHands.SetActive(true);
+                        rifleHands.SetActive(false);
+                        gunInHand = weapon;
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
     void weaponInput()
     {
         orgin = (playerCamera.position) - crouchDiff;
@@ -66,8 +112,8 @@ public class playerWeapon : MonoBehaviour
     }
     void drawRange()
     {
-        Debug.DrawRay(orgin, direction * weaponRange, Color.red);
-        if (Physics.Raycast(orgin, direction, out RaycastHit hit, weaponRange))
+        Debug.DrawRay(orgin, direction * gunInHand.weaponRange, Color.red);
+        if (Physics.Raycast(orgin, direction, out RaycastHit hit, gunInHand.weaponRange))
         {
             lookingAt = hit.collider.gameObject;
         }
@@ -78,14 +124,14 @@ public class playerWeapon : MonoBehaviour
     }
     IEnumerator reloadWeapon()
     {
+        firedWeapon = true;
         EventCore.EV_playerReload.Invoke();
         AudioSource.PlayOneShot(gunReloadAC);
-        float _newAmmo = Mathf.Clamp(extraAmmo, 0, clipMax);
-        float usedAmmo = _newAmmo - currentAmmo;
-        firedWeapon = true;
+        int _newAmmo = Mathf.Clamp(gunInHand.extraAmmo, 0, gunInHand.maxAmmo);
+        int usedAmmo = _newAmmo - gunInHand.currentAmmo;
         yield return new WaitForSeconds(2);
-        currentAmmo = _newAmmo;
-        extraAmmo -= usedAmmo;
+        gunInHand.currentAmmo = _newAmmo;
+        gunInHand.extraAmmo -= usedAmmo;
         firedWeapon = false;
     }
     IEnumerator fireWeapon()
@@ -93,7 +139,7 @@ public class playerWeapon : MonoBehaviour
         RaycastHit hit;
         firedWeapon = true;
         AudioSource.PlayOneShot(gunShotAC);
-        currentAmmo--;
+        gunInHand.currentAmmo--;
         EventCore.EV_playerShoot.Invoke();
         // direction based on the accuracy
         if (!isAccuracyLow())
@@ -101,7 +147,7 @@ public class playerWeapon : MonoBehaviour
             direction.x += Random.Range(-0.10f, 0.10f);
             direction.y += Random.Range(-0.10f, 0.10f);
         }
-        if (Physics.Raycast(orgin, direction, out hit, weaponRange))
+        if (Physics.Raycast(orgin, direction, out hit, gunInHand.weaponRange))
         {
             if (hit.collider != null)
             {
@@ -125,7 +171,7 @@ public class playerWeapon : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(weaponCoolDown);
+        yield return new WaitForSeconds(gunInHand.weaponCoolDown);
         firedWeapon = false;
     }
     
@@ -151,7 +197,8 @@ public class playerWeapon : MonoBehaviour
     }
     void increaseAmmo(float increaseAmount)
     {
-        extraAmmo += increaseAmount;
+        int valueChange = (int)increaseAmount;
+        gunInHand.extraAmmo += valueChange;
     }
 
     void pauseThis()

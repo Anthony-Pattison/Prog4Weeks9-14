@@ -33954,7 +33954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &524984631
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33987,7 +33987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6226415, g: 0.56205505, b: 0.502225, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -53622,11 +53622,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571de3913dced91418ecb5d5c0b46a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerWeapon
+  weaponInventory:
+  - {fileID: 11400000, guid: 8164facb72555724cb55f3e1660bc406, type: 2}
+  gunInHand: {fileID: 11400000, guid: 8164facb72555724cb55f3e1660bc406, type: 2}
   currentAmmo: 5
   extraAmmo: 50
   clipMax: 6
   weaponRange: 10
   weaponCoolDown: 0.2
+  pistolHands: {fileID: 524984630}
+  rifleHands: {fileID: 1732197975}
   playerCamera: {fileID: 286291387}
   lookingAt: {fileID: 0}
   accuracyValue: {fileID: 11400000, guid: d1a72acda2062494bb72772b121ad812, type: 2}
@@ -53637,6 +53642,7 @@ MonoBehaviour:
   weaponDamge: 2
   crouchDiff: {x: 0, y: 0, z: 0}
   _movement: {x: 0, y: 0, z: 0}
+  pistolOut: 1
 --- !u!114 &1083986271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61940,14 +61946,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296973603}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 19.29, y: 2.01, z: 3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 286291387}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1296973605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84996,7 +85002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1732197976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -92216,6 +92222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gunUpGrade
   newClipAmount: 10
   itemText: {fileID: 11400000, guid: a464aa61446f7eb4fab6419aa6650786, type: 2}
+  gunToLevelUp: {fileID: 11400000, guid: 8164facb72555724cb55f3e1660bc406, type: 2}
   playerObject: {fileID: 1083986266}
 --- !u!1 &2065454069
 GameObject:
