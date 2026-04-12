@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a4e313224f399419fcd50fe3e77ab7, type: 3}
+  m_Name: riflePickUp
+  m_EditorClassIdentifier: Assembly-CSharp::onScreenText
+  titleText: Rifle
+  discriptionText: "You got a new gun. This more pixelated gun shoots farther and
+    faster then the pistol. However, it does less damage over all. \n(scroll wheel
+    to change guns)"
+  showImageSprite: {fileID: 21300000, guid: 14697495c9438674c8d9f5f5a9d8d848, type: 3}

@@ -1,13 +1,11 @@
 using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class playerWeapon : MonoBehaviour
 {
     [Header("Player Weapon")]
-    public gunValue[] weaponInventory;
+    public List<gunValue> weaponInventory;
     public gunValue gunInHand;
     public float currentAmmo = 5;
     public float extraAmmo = 5;

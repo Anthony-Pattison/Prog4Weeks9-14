@@ -5,15 +5,22 @@ public class enemyHealthScript : MonoBehaviour
     eventCore EventCore;
     public float healthValue;
     float currentHeath;
+    Transform playerTransform;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
+        playerTransform = GameObject.Find("Player").transform;
         EventCore.EV_enemyDamage.AddListener(takeDamage);
         EventCore.EV_increaseHealth.AddListener(increaseThisHealth);
         currentHeath = healthValue;
     }
-  
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, (playerTransform.position - transform.position).normalized, Color.red, 10);
+    }
+
     void increaseThisHealth(string name,float increaseValue)
     {
         if(name != this.gameObject.name)

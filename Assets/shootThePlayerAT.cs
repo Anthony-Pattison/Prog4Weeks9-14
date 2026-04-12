@@ -37,7 +37,7 @@ namespace NodeCanvas.Tasks.Actions
                 agent.transform.LookAt(playerTransformBBP.value);
 
             Debug.DrawRay(agent.transform.position, (playerTransformBBP.value.position - agent.transform.position).normalized * fireDistance);
-            if (Physics.Raycast(agent.transform.position, agent.transform.forward, out hit, fireDistance))
+            if (Physics.Raycast(agent.transform.position, (playerTransformBBP.value.position - agent.transform.position).normalized, out hit, fireDistance))
             {
                 Debug.Log(hit.collider.name);
                 if(!dontplaySound)
@@ -51,6 +51,10 @@ namespace NodeCanvas.Tasks.Actions
             {
                 shooting = StartCoroutine(turretShooting());
             }
+            else
+            {
+                EndAction();
+            }
         }
 
        IEnumerator turretShooting()
@@ -61,7 +65,7 @@ namespace NodeCanvas.Tasks.Actions
             while (true) {
                 RaycastHit hit;
 
-                if (Physics.Raycast(agent.transform.position, (playerTransformBBP.value.position - agent.transform.position).normalized, out hit, fireDistance))
+                if (Physics.Raycast(agent.transform.position + new Vector3(0,.5f,0), (playerTransformBBP.value.position - agent.transform.position).normalized, out hit, fireDistance))
                 {
                     Debug.Log(hit.collider.name);
                     if (!dontplaySound)
