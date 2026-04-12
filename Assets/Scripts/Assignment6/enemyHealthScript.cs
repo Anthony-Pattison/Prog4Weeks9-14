@@ -18,7 +18,10 @@ public class enemyHealthScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, (playerTransform.position - transform.position).normalized, Color.red, 10);
+        if (playerTransform != null)
+        {
+            Debug.DrawRay(transform.position, (playerTransform.position - transform.position).normalized, Color.red, 10);
+        }
     }
 
     void increaseThisHealth(string name,float increaseValue)
