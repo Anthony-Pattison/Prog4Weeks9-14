@@ -14,7 +14,8 @@ public class playerScript : MonoBehaviour
     public float collisonCheckDistance = 1.5f;
     Rigidbody thisRB;
     float sprintSpeedMulit = 1;
-    Vector3 playerStart;
+    [HideInInspector]
+    public Vector3 playerStart;
 
     //UI//
     public void mouseSensChange(float change)
@@ -33,7 +34,10 @@ public class playerScript : MonoBehaviour
             currPlayerWeapon = GetComponent<playerWeapon>();
         }
     }
-
+    public void respawnPlayer()
+    {
+        transform.position = playerStart;
+    }
     // Update is called once per frame
     void Update()
     {

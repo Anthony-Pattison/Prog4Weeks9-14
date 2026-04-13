@@ -11,6 +11,15 @@ public class playerHealth : MonoBehaviour
         eventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
         eventCore.playerDamage.AddListener(takeDamage);
         eventCore.EV_increaseHealth.AddListener(increaseThisHealth);
+        eventCore.playerDamage.AddListener(checkHealth);
+    }
+
+    void checkHealth(float nothin)
+    {
+        if(playerHeath.value <= 0)
+        {
+            GetComponent<playerScript>().respawnPlayer();
+        }
     }
     void increaseThisHealth(string name, float increaseValue)
     {

@@ -37,7 +37,6 @@ public class targetScript : MonoBehaviour
         if (targetName != this.gameObject.name)
             return;
         MeshRenderer mr = targetModel.GetComponent<MeshRenderer>();
-        print(mr.materials[1].name);
         mr.materials[1].color = Color.red;
         unlockAbleDoor.GetComponent<Animator>().SetTrigger(animationTrigger);
     }

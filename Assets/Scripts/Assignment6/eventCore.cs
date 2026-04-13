@@ -22,4 +22,8 @@ public class eventCore : MonoBehaviour
     public UnityEvent EV_unPauseGame;
 
     public UnityEvent<onScreenText> EV_upgradePickUp;
+
+    public UnityEvent EV_playCameraAnimations;
+
+    public UnityEvent EV_finshCameraAnimation;
 }

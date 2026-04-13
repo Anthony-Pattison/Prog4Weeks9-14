@@ -88,7 +88,7 @@ namespace NodeCanvas.Tasks.Actions
                 {
                     EndAction(true);
                 }
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.25f);
             }
         }
 

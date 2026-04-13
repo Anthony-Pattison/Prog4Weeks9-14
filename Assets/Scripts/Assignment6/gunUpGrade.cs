@@ -29,6 +29,7 @@ public class gunUpGrade : MonoBehaviour
 
         EventCore.EV_upgradePickUp.Invoke(itemText);
         GetComponent<BoxCollider>().enabled = false;
+        transform.GetChild(0).gameObject.SetActive(false);
     }
     void gunPickUp()
     {

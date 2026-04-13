@@ -5,6 +5,12 @@ public class CameraAnimationManager : MonoBehaviour
 {
     [SerializeField]
     CameraAnimation[] animations;
+    eventCore EventCore;
+    private void Start()
+    {
+        EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
+        EventCore.EV_playCameraAnimations.AddListener(playAllAnimations);
+    }
 
     [ContextMenu("Play animations")]
     void playAllAnimations()
@@ -18,5 +24,6 @@ public class CameraAnimationManager : MonoBehaviour
         {
             yield return animation.camMovement();
         }
+        EventCore.EV_finshCameraAnimation.Invoke();
     }
 }

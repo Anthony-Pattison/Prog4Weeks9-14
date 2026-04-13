@@ -36,6 +36,7 @@ public class playerWeapon : MonoBehaviour
     public Vector3 _movement;
     public bool pistolOut = true;
     eventCore EventCore;
+    Vector3 cameraPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,8 +44,20 @@ public class playerWeapon : MonoBehaviour
         EventCore.EV_increasePlayerAmmo.AddListener(increaseAmmo);
         EventCore.EV_pauseGame.AddListener(pauseThis);
         EventCore.EV_unPauseGame.AddListener(unPauseThis);
+        EventCore.EV_playCameraAnimations.AddListener(pausePlayer);
+        EventCore.EV_finshCameraAnimation.AddListener(unPausePlayer);
+        
     }
-
+    void unPausePlayer()
+    {
+        this.gameObject.SetActive(true);
+        Camera.main.transform.position = cameraPos;
+    }
+    void pausePlayer()
+    {
+        cameraPos = Camera.main.transform.position;
+        this.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -197,6 +210,10 @@ public class playerWeapon : MonoBehaviour
     {
         int valueChange = (int)increaseAmount;
         gunInHand.extraAmmo += valueChange;
+        foreach (gunValue _Value in weaponInventory)
+        {
+            _Value.extraAmmo += valueChange;
+        }
     }
 
     void pauseThis()
