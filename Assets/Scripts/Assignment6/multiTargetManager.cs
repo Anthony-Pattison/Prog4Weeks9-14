@@ -33,7 +33,15 @@ public class multiTargetManager : MonoBehaviour
             if (targetsGotten == targetNeeded.Length)
             {
                 unlockAbleDoor.GetComponent<Animator>().SetTrigger(animationTrigger);
-                this.enabled = false;
+                if (GetComponent<knockOverGolem>() != null)
+                {
+                    GetComponent<knockOverGolem>().setGolemValue();
+                    this.enabled = false;
+                }
+                else
+                {
+                    this.enabled = false;
+                }
             }
 
         }

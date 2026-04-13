@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class enemyHealthScript : MonoBehaviour
 {
+    public GameObject golem;
     eventCore EventCore;
     public float healthValue;
     float currentHeath;
@@ -39,6 +40,8 @@ public class enemyHealthScript : MonoBehaviour
         currentHeath -= incomingDamage;
         if (currentHeath <= 0)
         {
+            if(golem != null)
+                golem.SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
