@@ -10,7 +10,7 @@ public class cameraHolderScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+     void FixedUpdate()
     {
         transform.position = playerOrientation.position;
         transform.rotation = playerOrientation.rotation;

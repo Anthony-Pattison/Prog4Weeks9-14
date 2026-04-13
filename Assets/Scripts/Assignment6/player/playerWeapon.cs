@@ -36,6 +36,9 @@ public class playerWeapon : MonoBehaviour
     public Vector3 _movement;
     public bool pistolOut = true;
     eventCore EventCore;
+    public GameObject cameraObject;
+    public GameObject golumObject;
+    public CameraAnimation cameraAnimation;
     Vector3 cameraPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,16 +54,21 @@ public class playerWeapon : MonoBehaviour
     void unPausePlayer()
     {
         this.gameObject.SetActive(true);
-        Camera.main.transform.position = cameraPos;
+        cameraObject.transform.localPosition = Vector3.zero;
+        cameraObject.transform.localEulerAngles = Vector3.zero;
     }
     void pausePlayer()
     {
-        cameraPos = Camera.main.transform.position;
         this.gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
+        if (golumObject.activeInHierarchy == false)
+        {
+            cameraAnimation.startCameraMovement();
+            this.enabled = false;
+        }
         weaponInput();
         drawRange();
         changeAccuracy();

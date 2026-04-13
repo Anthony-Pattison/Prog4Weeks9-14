@@ -15,7 +15,7 @@ MonoBehaviour:
   weapon: 1
   currentAmmo: 18
   maxAmmo: 18
-  extraAmmo: 999
+  extraAmmo: 10
   damage: 3
   weaponRange: 15
   weaponCoolDown: 0.1

@@ -50,16 +50,16 @@ public class playerScript : MonoBehaviour
         // if the player is moving lower accuracy
         currPlayerWeapon._movement = KeyboardInput();
 
+        transform.position += KeyboardInput() * movementSpeed * sprintSpeedMulit * Time.deltaTime;
+    }
+    private void LateUpdate()
+    {
         // player looking 
         Vector3 rotation = transform.eulerAngles;
         rotation += mouseInput();
 
         transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
-
-
-        transform.position += KeyboardInput() * movementSpeed * sprintSpeedMulit * Time.deltaTime;
     }
-
     void killFloor()
     {
         if (transform.position.y <= -10)

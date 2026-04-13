@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 using UnityEngine.UI;
 
@@ -27,6 +28,10 @@ public class CameraAnimation : MonoBehaviour
     bool manyTransforms;
     bool corutineRunning;
     bool camShakeRunning;
+
+    public bool endGame;
+    public GameObject endGameText;
+    public string sceneName;
     void Start()
     {
         findMainCamera = cameraAni.findCamera;
@@ -84,7 +89,7 @@ public class CameraAnimation : MonoBehaviour
     /// Play the camera animations
     /// </summary>
     [ContextMenu("Play Animation")]
-    private void startCameraMovement()
+    public void startCameraMovement()
     {
         if (corutineRunning)
             return;
@@ -157,6 +162,11 @@ public class CameraAnimation : MonoBehaviour
         // stop the camera shaking
         corutineRunning = false;
         camShakeRunning = false;
+        if (endGame) {
+            endGameText.SetActive(true);
+            yield return new WaitForSeconds(3);
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     Vector3 shakeValue()

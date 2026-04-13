@@ -7,11 +7,17 @@ public class golomScript : MonoBehaviour
     public bool doneDaze;
     eventCore EventCore;
     public FSMOwner FSMOwner;
+    public CameraAnimation CameraAnimation;
     private void Start()
     {
         EventCore = GameObject.Find("EventCore").GetComponent<eventCore>();
         EventCore.EV_finshCameraAnimation.AddListener(unPauseThis);
     }
+
+    public void golumDefeated()
+    {
+        CameraAnimation.startCameraMovement();
+    } 
 
     void unPauseThis()
     {
