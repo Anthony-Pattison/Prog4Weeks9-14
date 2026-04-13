@@ -123,7 +123,7 @@ public class playerWeapon : MonoBehaviour
     void weaponInput()
     {
         orgin = (playerCamera.position) - crouchDiff;
-        direction = transform.forward;
+        direction = playerCamera.forward;
         if (Input.GetMouseButton(0) && !firedWeapon && currentAmmo > 0)
         {
             StartCoroutine(fireWeapon());

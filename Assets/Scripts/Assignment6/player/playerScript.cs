@@ -6,8 +6,7 @@ public class playerScript : MonoBehaviour
     [Header("For movement")]
     [SerializeField]
     float movementSpeed;
-    [SerializeField]
-    float mouseSens;
+    
     public GameObject cameraTransform;
     playerWeapon currPlayerWeapon;
 
@@ -17,11 +16,8 @@ public class playerScript : MonoBehaviour
     [HideInInspector]
     public Vector3 playerStart;
 
-    //UI//
-    public void mouseSensChange(float change)
-    {
-        mouseSens = change;
-    }
+  
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,14 +47,7 @@ public class playerScript : MonoBehaviour
         currPlayerWeapon._movement = KeyboardInput();
 
         transform.position += KeyboardInput() * movementSpeed * sprintSpeedMulit * Time.deltaTime;
-    }
-    private void LateUpdate()
-    {
-        // player looking 
-        Vector3 rotation = transform.eulerAngles;
-        rotation += mouseInput();
-
-        transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
+       
     }
     void killFloor()
     {
@@ -89,20 +78,7 @@ public class playerScript : MonoBehaviour
             sprintSpeedMulit = 1;
         }
     }
-    Vector3 mouseInput()
-    {
-        float xLook = -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSens;
-        float yLook = Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSens;
-        if (transform.eulerAngles.x >= 80 && transform.eulerAngles.x <= 90)
-        {
-            xLook = Mathf.Clamp(xLook, -1, 0);
-        }
-        if (transform.eulerAngles.x >= 200 && transform.eulerAngles.x <= 300)
-        {
-            xLook = Mathf.Clamp(xLook, 0, 1);
-        }
-        return new Vector2( xLook, yLook);
-    }
+    
     Vector3 KeyboardInput()
     {
         float xInput = Input.GetAxis("Horizontal");

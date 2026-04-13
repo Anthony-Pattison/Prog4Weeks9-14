@@ -27065,6 +27065,7 @@ GameObject:
   - component: {fileID: 286291385}
   - component: {fileID: 286291388}
   - component: {fileID: 286291389}
+  - component: {fileID: 286291390}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -27207,6 +27208,20 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 98ff0532f6237fe45a49535e0aaa9ea8, type: 2}
+--- !u!114 &286291390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286291384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc1c44f88f47e143852b5a7169ae4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerCam
+  orientation: {fileID: 1083986266}
+  mouseSens: 2
 --- !u!1 &290309468
 GameObject:
   m_ObjectHideFlags: 0
@@ -67656,6 +67671,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851667280}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &855041154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855041155}
+  m_Layer: 0
+  m_Name: cameraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &855041155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855041154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.309, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1083986268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861000491
 GameObject:
   m_ObjectHideFlags: 0
@@ -83603,7 +83649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerScript
   movementSpeed: 3
-  mouseSens: 600
   cameraTransform: {fileID: 286291384}
   collisonCheckDistance: 1
   playerStart: {x: 0, y: 0, z: 0}
@@ -83623,6 +83668,7 @@ Transform:
   - {fileID: 1427086096}
   - {fileID: 164207550}
   - {fileID: 42852272}
+  - {fileID: 855041155}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &1083986269
@@ -83649,7 +83695,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1083986270
@@ -94235,6 +94281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow Particle System (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -94265,14 +94315,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296973603}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.29, y: 2.01, z: 3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 286291387}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1296973605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94285,7 +94335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5ff8b001bc0204f9dece1db0743e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameraHolderScript
-  playerOrientation: {fileID: 164207550}
+  playerOrientation: {fileID: 855041155}
 --- !u!1 &1300626267
 GameObject:
   m_ObjectHideFlags: 0
@@ -124100,14 +124150,14 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1801349315}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1200
+  m_MaxValue: 40
   m_WholeNumbers: 0
-  m_Value: 600
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083986267}
-        m_TargetAssemblyTypeName: playerScript, Assembly-CSharp
+      - m_Target: {fileID: 286291390}
+        m_TargetAssemblyTypeName: playerCam, Assembly-CSharp
         m_MethodName: mouseSensChange
         m_Mode: 0
         m_Arguments:
@@ -125301,6 +125351,10 @@ PrefabInstance:
     - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
       propertyPath: m_Name
       value: Snow Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -128320,6 +128374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow Particle System (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -128400,6 +128458,10 @@ PrefabInstance:
     - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
       propertyPath: m_Name
       value: Snow Particle System (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -130644,6 +130706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snow Particle System (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5025952144903366893, guid: 040e051fbc27fd54c9eff32de732b6b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -131942,7 +132008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gunUpGrade
   weaponPickUp: 0
   weaponPickUpValue: {fileID: 0}
-  newClipAmount: 10
+  newClipAmount: 15
   itemText: {fileID: 11400000, guid: a464aa61446f7eb4fab6419aa6650786, type: 2}
   gunToLevelUp: {fileID: 11400000, guid: 8164facb72555724cb55f3e1660bc406, type: 2}
   playerObject: {fileID: 1083986266}
