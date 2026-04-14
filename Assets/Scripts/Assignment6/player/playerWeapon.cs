@@ -24,6 +24,7 @@ public class playerWeapon : MonoBehaviour
     public AudioSource AudioSource;
     public AudioClip gunShotAC;
     public AudioClip gunReloadAC;
+    public AudioClip[] rifleFireAC;
     public GameObject bulletHole;
     public float weaponDamge;
     bool firedWeapon = false;
@@ -157,7 +158,13 @@ public class playerWeapon : MonoBehaviour
     {
         RaycastHit hit;
         firedWeapon = true;
-        AudioSource.PlayOneShot(gunShotAC);
+        if (gunInHand.weapon == weapon.rifle)
+        {
+            AudioSource.PlayOneShot(rifleFireAC[Random.Range(0, rifleFireAC.Length)]);
+        }
+        else {
+            AudioSource.PlayOneShot(gunShotAC);
+        }
         gunInHand.currentAmmo--;
         EventCore.EV_playerShoot.Invoke();
         // direction based on the accuracy

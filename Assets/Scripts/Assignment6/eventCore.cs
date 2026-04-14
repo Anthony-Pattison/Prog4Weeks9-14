@@ -26,4 +26,6 @@ public class eventCore : MonoBehaviour
     public UnityEvent EV_playCameraAnimations;
 
     public UnityEvent EV_finshCameraAnimation;
+
+    public UnityEvent EV_playGotCheckPoint;
 }

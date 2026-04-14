@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 public class playerHealth : MonoBehaviour
 {
     public valueObject playerHeath;
+    public float maxHealth;
     eventCore eventCore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,10 +27,12 @@ public class playerHealth : MonoBehaviour
         if (name != this.gameObject.name)
             return;
         playerHeath.value += increaseValue;
+        playerHeath.value = Mathf.Clamp(playerHeath.value, 0, maxHealth);
     }
 
     void takeDamage(float incomingDamage)
     {
         playerHeath.value -= incomingDamage;
+        playerHeath.value = Mathf.Clamp(playerHeath.value, 0, maxHealth);
     }
 }

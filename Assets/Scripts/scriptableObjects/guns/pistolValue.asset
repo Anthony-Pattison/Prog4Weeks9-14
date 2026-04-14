@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: pistolValue
   m_EditorClassIdentifier: Assembly-CSharp::gunValue
   weapon: 0
-  currentAmmo: 2
+  currentAmmo: 9
   maxAmmo: 6
-  extraAmmo: 33
+  extraAmmo: 31
   damage: 5
-  weaponRange: 20
+  weaponRange: 15
   weaponCoolDown: 0.2

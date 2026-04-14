@@ -13,6 +13,9 @@ public class itemPickUp : MonoBehaviour
     public bool rotate = true;
     public float rotateAmount = 0.5f;
     public float rotateWaitAmount = 0.05f;
+    [Header("Sounds")]
+    public AudioSource AudioSource;
+    public AudioClip pickUpSound;
     eventCore EventCore;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,10 +39,12 @@ public class itemPickUp : MonoBehaviour
         string colliderName = other.gameObject.name;
         if (isAmmo)
         {
+            AudioSource.PlayOneShot(pickUpSound);
             increaseAmmo(colliderName);
         }
         if (isHealth)
         {
+            AudioSource.PlayOneShot(pickUpSound);
             increaseHealth(colliderName);
         }
         this.gameObject.SetActive(false);
